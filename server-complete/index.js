@@ -5,7 +5,7 @@
 const gifs = require('./gifs.json');
 const express = require('express');
 
-// The path module is useful for constructing relative filepaths
+// The path module is useful for constructing relative pathToFrontends
 const path = require('path');
 
 //////////////////////////////////////////
@@ -14,9 +14,12 @@ const path = require('path');
 
 const app = express();
 
-// the filepath is to the entire assets folder
+// the pathToFrontend is to the entire assets folder
 // the dist folder must be built with `npm run build`
-const filepath = path.join(__dirname, '../vite-project/dist');
+let pathToFrontend = path.join(__dirname, '../vite-project');
+if (process.env.NODE_ENV === 'production') {
+  pathToFrontend = path.join(__dirname, '../vite-project/dist');
+}
 
 //////////////////////////////////////////
 // Middleware
@@ -29,8 +32,8 @@ const logRoutes = (req, res, next) => {
   next(); // Passes the request to the next middleware/controller
 };
 
-// generate middleware using the filepath
-const serveStatic = express.static(filepath);
+// generate middleware using the pathToFrontend
+const serveStatic = express.static(pathToFrontend);
 
 // Register the logRoutes middleware globally to log all requests
 app.use(logRoutes);
