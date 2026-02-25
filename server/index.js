@@ -24,7 +24,7 @@ const serveData = (req, res, next) => res.send(gifs);
 
 const serveHello = (req, res, next) => {
   const name = req.query.name || "stranger";
-  res.send(`hello ${name}`);
+  res.send({ message: `hello ${name}` });
 }
 
 app.get('/api/hello', serveHello);
