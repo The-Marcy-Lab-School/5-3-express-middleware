@@ -33,10 +33,20 @@ const serveHello = (req, res, next) => {
   res.send({ message: `hello ${name}` });
 }
 
+const serve404 = (req, res, next) => {
+  res.status(404).send({ error: `Not found: ${req.originalUrl}` });
+}
+
+/////////////////////
+// Endpoints
+/////////////////////
+
 app.get('/api/hello', serveHello);
 app.get('/api/users', serveUsers);
 
 // TODO: Add an /api/users/:id endpoint to serve a single user
+
+app.use(serve404); // captures ALL unhandled requests
 
 /////////////////////
 // Listen
