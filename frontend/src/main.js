@@ -41,7 +41,7 @@ fetchDatabutton.addEventListener('click', async () => {
     gifsList.innerHTML = 'Loading...';
 
     // A relative path fetches from the same host (we don't need http://localhost)
-    const response = await fetch('/api/data');
+    const response = await fetch('/api/gifs');
     if (!response.ok) {
       throw Error(`Fetching gif data failed: ${response.status} ${response.statusText}`);
     }
