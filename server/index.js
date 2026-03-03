@@ -3,6 +3,7 @@
 /////////////////////
 
 const express = require('express');
+const gifs = require('./gifs.json');
 
 /////////////////////
 // Constants
@@ -33,6 +34,10 @@ const serveHello = (req, res, next) => {
   res.send({ message: `hello ${name}` });
 }
 
+// TODO: Add a serverUser controller
+
+// TODO: Add a serveGifs controller
+
 const serve404 = (req, res, next) => {
   res.status(404).send({ error: `Not found: ${req.originalUrl}` });
 }
@@ -45,6 +50,8 @@ app.get('/api/hello', serveHello);
 app.get('/api/users', serveUsers);
 
 // TODO: Add an /api/users/:id endpoint to serve a single user
+
+// TODO: Add an /api/gifs endpoint to serve the gifs JSON
 
 app.use(serve404); // captures ALL unhandled requests
 
