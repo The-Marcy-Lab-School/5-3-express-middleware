@@ -55,16 +55,18 @@ const serveData = (req, res, next) => res.send(gifs);
 const serveUsers = (req, res, next) => {
   res.send(users);
 }
-
 const serveHello = (req, res, next) => {
   const name = req.query.name || "stranger";
   res.send({ message: `hello ${name}` });
+}
+const serve404 = (req, res, next) => {
+  res.status(404).send({ error: `Not found: ${req.originalUrl}` });
 }
 
 app.get('/api/users', serveUsers);
 app.get('/api/hello', serveHello);
 app.get('/api/data', serveData);
-
+app.use(serve404); // captures ALL unhandled requests
 //////////////////////////////////////////
 // Listen
 //////////////////////////////////////////
