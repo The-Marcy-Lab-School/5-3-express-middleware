@@ -77,17 +77,9 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-#gifs-list {
-  display: flex;
+#users-list {
   list-style: none;
-  gap: 1rem;
 }
-
-img {
-  width: 100%;
-}
-
-
 
 @media (prefers-color-scheme: light) {
   :root {

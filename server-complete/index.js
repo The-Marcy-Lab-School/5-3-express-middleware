@@ -5,6 +5,13 @@
 const gifs = require('./gifs.json');
 const express = require('express');
 
+const users = [
+  { name: "Carmen", id: 123 },
+  { name: "Reuben", id: 456 },
+  { name: "Maya", id: 789 },
+];
+
+
 // The path module is useful for constructing relative pathToFrontends
 const path = require('path');
 
@@ -16,9 +23,9 @@ const app = express();
 
 // the pathToFrontend is to the entire assets folder
 // the dist folder must be built with `npm run build`
-let pathToFrontend = path.join(__dirname, '../vite-project');
+let pathToFrontend = path.join(__dirname, '../frontend');
 if (process.env.NODE_ENV === 'production') {
-  pathToFrontend = path.join(__dirname, '../vite-project/dist');
+  pathToFrontend = path.join(__dirname, '../frontend/dist');
 }
 
 //////////////////////////////////////////
@@ -45,12 +52,16 @@ app.use(serveStatic);
 //////////////////////////////////////////
 
 const serveData = (req, res, next) => res.send(gifs);
+const serveUsers = (req, res, next) => {
+  res.send(users);
+}
 
 const serveHello = (req, res, next) => {
   const name = req.query.name || "stranger";
   res.send({ message: `hello ${name}` });
 }
 
+app.get('/api/users', serveUsers);
 app.get('/api/hello', serveHello);
 app.get('/api/data', serveData);
 

@@ -2,7 +2,7 @@
 const helloForm = document.querySelector('#hello-form')
 const helloResponseEl = document.querySelector('#hello-response');
 const fetchDatabutton = document.querySelector('#fetch-data-btn');
-const gifsList = document.querySelector('#gifs-list');
+const usersList = document.querySelector('#users-list');
 
 /////////////////////////////////////////////////
 // Form Submission --> GET /api/hello --> Render
@@ -38,27 +38,22 @@ helloForm.addEventListener('submit', async (event) => {
 
 fetchDatabutton.addEventListener('click', async () => {
   try {
-    gifsList.innerHTML = 'Loading...';
-
     // A relative path fetches from the same host (we don't need http://localhost)
-    const response = await fetch('/api/gifs');
+    const response = await fetch('/api/users');
     if (!response.ok) {
       throw Error(`Fetching gif data failed: ${response.status} ${response.statusText}`);
     }
     const data = await response.json();
 
-    // Render the gifs in a list
-    gifsList.innerHTML = '';
-    data.data.forEach((gif) => {
+    // Render the users in a list
+    data.forEach((user) => {
       const li = document.createElement('li');
-      const img = document.createElement('img');
-      img.src = gif.images.original.url;
-      li.append(img);
-      gifsList.append(li);
+      li.textContent = user.name;
+      usersList.append(li);
     });
   }
   catch (error) {
     console.error(error);
-    gifsList.innerHTML = error.message;
+    usersList.innerHTML = error.message;
   }
 })
