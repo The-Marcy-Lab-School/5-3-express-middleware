@@ -5,21 +5,19 @@
 const gifs = require('./gifs.json');
 const express = require('express');
 
+//////////////////////////////////////////
+// Constants
+//////////////////////////////////////////
+
+const app = express();
 const users = [
   { name: "Carmen", id: 123 },
   { name: "Reuben", id: 456 },
   { name: "Maya", id: 789 },
 ];
 
-
 // The path module is useful for constructing relative pathToFrontends
 const path = require('path');
-
-//////////////////////////////////////////
-// Constants
-//////////////////////////////////////////
-
-const app = express();
 
 // the pathToFrontend is to the entire assets folder
 // the dist folder must be built with `npm run build`
@@ -67,6 +65,7 @@ app.get('/api/users', serveUsers);
 app.get('/api/hello', serveHello);
 app.get('/api/data', serveData);
 app.use(serve404); // captures ALL unhandled requests
+
 //////////////////////////////////////////
 // Listen
 //////////////////////////////////////////
