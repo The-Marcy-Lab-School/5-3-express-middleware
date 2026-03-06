@@ -4,6 +4,8 @@
 
 const gifs = require('./gifs.json');
 const express = require('express');
+// The path module is useful for constructing relative pathToFrontends
+const path = require('path');
 
 //////////////////////////////////////////
 // Constants
@@ -15,9 +17,6 @@ const users = [
   { name: "Reuben", id: 456 },
   { name: "Maya", id: 789 },
 ];
-
-// The path module is useful for constructing relative pathToFrontends
-const path = require('path');
 
 // the pathToFrontend is to the entire assets folder
 // the dist folder must be built with `npm run build`
